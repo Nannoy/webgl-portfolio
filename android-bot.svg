@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 480">
+<style>
+/* gentle float bob — whole bot */
+@keyframes float-bob {
+  0%,100%{ transform:translateY(0);   }
+  50%    { transform:translateY(-13px);}
+}
+.bot {
+  animation: float-bob 3.2s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center bottom;
+}
+
+/* antenna tips pulse */
+@keyframes ant-tip {
+  0%,100%{ transform:scale(1);   opacity:1;   }
+  50%    { transform:scale(1.45); opacity:0.72;}
+}
+.ant-tip {
+  animation: ant-tip 1.6s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.ant-tip-r { animation-delay: 0.28s; }
+
+/* eye blink */
+@keyframes blink {
+  0%,92%,100%{ transform:scaleY(1);    }
+  95%        { transform:scaleY(0.06); }
+}
+.eye {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: blink 4.8s ease-in-out infinite;
+}
+.eye-r { animation-delay: 0.06s; }
+
+/* chest LED cycling — staggered pulse */
+@keyframes led-pulse {
+  0%,100%{ opacity:0.88; }
+  50%    { opacity:0.18; }
+}
+.led-a { animation: led-pulse 1.5s ease-in-out infinite; }
+.led-b { animation: led-pulse 1.5s ease-in-out infinite; animation-delay:0.5s; }
+.led-c { animation: led-pulse 1.5s ease-in-out infinite; animation-delay:1.0s; }
+
+/* status bars fade */
+@keyframes bar-fade {
+  0%,100%{ opacity:0.35; }
+  50%    { opacity:0.15; }
+}
+.bar1 { animation: bar-fade 2s ease-in-out infinite; }
+.bar2 { animation: bar-fade 2s ease-in-out infinite; animation-delay:0.7s; }
+</style>
+
+<!-- everything in one group for the float -->
+<g class="bot">
+  <!-- left antenna -->
+  <line x1="114" y1="112" x2="88"  y2="58" stroke="#3DDC84" stroke-width="5" stroke-linecap="round"/>
+  <circle class="ant-tip"   cx="86"  cy="54" r="8" fill="#3DDC84"/>
+
+  <!-- right antenna -->
+  <line x1="206" y1="112" x2="232" y2="58" stroke="#3DDC84" stroke-width="5" stroke-linecap="round"/>
+  <circle class="ant-tip ant-tip-r" cx="234" cy="54" r="8" fill="#3DDC84"/>
+
+  <!-- head dome -->
+  <path d="M 80 158 A 80 80 0 0 1 240 158 Z" fill="#3DDC84"/>
+  <!-- head flat base connecting to body -->
+  <rect x="80" y="154" width="160" height="18" fill="#3DDC84"/>
+
+  <!-- eyes (white, with blink) -->
+  <circle class="eye"   cx="125" cy="136" r="12" fill="#ffffff"/>
+  <circle class="eye eye-r" cx="195" cy="136" r="12" fill="#ffffff"/>
+
+  <!-- body -->
+  <rect x="76" y="178" width="168" height="142" rx="16" fill="#3DDC84"/>
+
+  <!-- chest panel -->
+  <rect x="100" y="195" width="120" height="80" rx="8" fill="rgba(0,0,0,0.16)"/>
+
+  <!-- chest LEDs — cycling -->
+  <circle class="led-a" cx="130" cy="232" r="8" fill="#ffffff"/>
+  <circle class="led-b" cx="160" cy="232" r="8" fill="#ffffff"/>
+  <circle class="led-c" cx="190" cy="232" r="8" fill="#ffffff"/>
+
+  <!-- status bars -->
+  <rect class="bar1" x="112" y="253" width="96" height="5" rx="2.5" fill="#ffffff"/>
+  <rect class="bar2" x="112" y="263" width="66" height="4" rx="2"   fill="#ffffff"/>
+
+  <!-- left arm -->
+  <rect x="32"  y="178" width="40" height="112" rx="20" fill="#3DDC84"/>
+  <!-- right arm -->
+  <rect x="248" y="178" width="40" height="112" rx="20" fill="#3DDC84"/>
+
+  <!-- arm shading (slightly darker shade) -->
+  <rect x="32"  y="270" width="40" height="22"  rx="12" fill="#2cb870"/>
+  <rect x="248" y="270" width="40" height="22"  rx="12" fill="#2cb870"/>
+
+  <!-- leg connectors -->
+  <rect x="88"  y="313" width="56" height="14" fill="#2cb870"/>
+  <rect x="176" y="313" width="56" height="14" fill="#2cb870"/>
+
+  <!-- legs -->
+  <rect x="90"  y="323" width="52" height="104" rx="26" fill="#3DDC84"/>
+  <rect x="178" y="323" width="52" height="104" rx="26" fill="#3DDC84"/>
+
+  <!-- foot base highlight -->
+  <ellipse cx="116" cy="424" rx="24" ry="7" fill="#2cb870"/>
+  <ellipse cx="204" cy="424" rx="24" ry="7" fill="#2cb870"/>
+</g>
+</svg>

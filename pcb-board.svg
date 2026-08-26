@@ -1,0 +1,258 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 580">
+<style>
+/* data packet travels along a trace */
+@keyframes pkt {
+  0%   { stroke-dashoffset:0;    opacity:0; }
+  6%   { opacity:0.95; }
+  75%  { stroke-dashoffset:-100; opacity:0.9; }
+  100% { stroke-dashoffset:-100; opacity:0; }
+}
+.ta {
+  stroke:#e8c055; stroke-width:2; fill:none; stroke-linecap:round;
+  stroke-dasharray:7 93;
+  animation: pkt 2.8s ease-in infinite;
+}
+.ta1{ animation-delay:0s;    }
+.ta2{ animation-delay:0.45s; }
+.ta3{ animation-delay:0.9s;  }
+.ta4{ animation-delay:1.35s; }
+.ta5{ animation-delay:1.8s;  }
+.ta6{ animation-delay:2.25s; }
+.ta7{ animation-delay:2.7s;  }
+
+/* via pulsing */
+@keyframes vp {
+  0%,100%{ opacity:0.4; }
+  50%    { opacity:1;   }
+}
+.vp { animation: vp 2s ease-in-out infinite; }
+.v1 { animation-delay:0s;    }
+.v2 { animation-delay:0.3s;  }
+.v3 { animation-delay:0.65s; }
+.v4 { animation-delay:1s;    }
+.v5 { animation-delay:1.35s; }
+.v6 { animation-delay:1.7s;  }
+
+/* IC processing flash */
+@keyframes ic-busy {
+  0%,78%,100%{ opacity:0; }
+  82%,95%    { opacity:0.18; }
+}
+.ic-glow { animation: ic-busy 4.5s linear infinite; }
+
+/* power LED blink */
+@keyframes pwr {
+  0%,45%,55%,100%{ opacity:1; }
+  48%,52%        { opacity:0.08; }
+}
+.pwr-led { animation: pwr 3.4s ease infinite; }
+
+/* scan line sweeping down the board */
+@keyframes scan {
+  0%  { transform:translateY(0);    opacity:0;    }
+  4%  { opacity:0.35; }
+  96% { opacity:0.2;  }
+  100%{ transform:translateY(556px);opacity:0;    }
+}
+.scan { animation: scan 5.5s linear infinite 1.2s; }
+</style>
+
+<!-- FR4 substrate -->
+<rect x="18" y="12" width="364" height="556" rx="8" fill="#1a5c2a"/>
+<rect x="22" y="16" width="356" height="548" rx="6" fill="#1e6630" opacity="0.45"/>
+<rect x="18" y="12" width="364" height="556" rx="8" fill="none" stroke="#2a8040" stroke-width="1.8"/>
+
+<!-- scan line -->
+<rect class="scan" x="18" y="12" width="364" height="2.5" rx="1" fill="rgba(100,255,140,0.28)"/>
+
+<!-- mounting holes -->
+<circle cx="46"  cy="42"  r="10" fill="#1a5c2a" stroke="#c9a83c" stroke-width="2.5"/>
+<circle cx="46"  cy="42"  r="4"  fill="#0f3018"/>
+<circle cx="354" cy="42"  r="10" fill="#1a5c2a" stroke="#c9a83c" stroke-width="2.5"/>
+<circle cx="354" cy="42"  r="4"  fill="#0f3018"/>
+<circle cx="46"  cy="538" r="10" fill="#1a5c2a" stroke="#c9a83c" stroke-width="2.5"/>
+<circle cx="46"  cy="538" r="4"  fill="#0f3018"/>
+<circle cx="354" cy="538" r="10" fill="#1a5c2a" stroke="#c9a83c" stroke-width="2.5"/>
+<circle cx="354" cy="538" r="4"  fill="#0f3018"/>
+
+<!-- power / GND rails -->
+<g stroke="#9c7e20" stroke-width="1.8" fill="none" opacity="0.55">
+  <line x1="60" y1="68" x2="340" y2="68"/>
+  <line x1="60" y1="78" x2="340" y2="78"/>
+</g>
+
+<!-- static base traces (muted) -->
+<g stroke="#9c7e20" stroke-width="1.5" fill="none" opacity="0.6">
+  <polyline points="148,148 100,148 100,90  60,90"/>
+  <polyline points="164,148 164,112         60,112"/>
+  <polyline points="200,148 200,96  340,96"/>
+  <polyline points="216,148 260,148 260,90  340,90"/>
+  <polyline points="252,148 252,124         340,124"/>
+  <polyline points="148,288 100,288 100,360 60,360"/>
+  <polyline points="200,288 200,380 200,440"/>
+  <polyline points="252,288 300,288 300,370 340,370"/>
+  <polyline points="216,288 216,360         340,360"/>
+  <polyline points="164,288 164,420 80,420"/>
+  <polyline points="128,168 60,168  60,260"/>
+  <polyline points="128,200 70,200  70,320"/>
+  <polyline points="272,184 340,184 340,280"/>
+  <polyline points="272,220 330,220 330,320"/>
+</g>
+
+<!-- animated trace overlays (bright data packets) -->
+<polyline class="ta ta1" pathLength="100" points="148,148 100,148 100,90  60,90"/>
+<polyline class="ta ta2" pathLength="100" points="200,148 200,96  340,96"/>
+<polyline class="ta ta3" pathLength="100" points="148,288 100,288 100,360 60,360"/>
+<polyline class="ta ta4" pathLength="100" points="252,288 300,288 300,370 340,370"/>
+<polyline class="ta ta5" pathLength="100" points="128,168 60,168  60,260"/>
+<polyline class="ta ta6" pathLength="100" points="272,184 340,184 340,280"/>
+<polyline class="ta ta7" pathLength="100" points="216,288 216,360 340,360"/>
+
+<!-- via rings -->
+<g fill="none" stroke="#c9a83c" stroke-width="1.8">
+  <circle class="vp v1" cx="60"  cy="90"  r="5"/>
+  <circle class="vp v2" cx="60"  cy="112" r="5"/>
+  <circle class="vp v3" cx="340" cy="96"  r="5"/>
+  <circle class="vp v1" cx="340" cy="124" r="5"/>
+  <circle class="vp v4" cx="60"  cy="168" r="5"/>
+  <circle class="vp v2" cx="60"  cy="260" r="5"/>
+  <circle class="vp v5" cx="70"  cy="320" r="5"/>
+  <circle class="vp v3" cx="340" cy="280" r="5"/>
+  <circle class="vp v6" cx="330" cy="320" r="5"/>
+  <circle class="vp v4" cx="60"  cy="360" r="5"/>
+  <circle class="vp v1" cx="80"  cy="420" r="5"/>
+  <circle class="vp v5" cx="200" cy="440" r="5"/>
+  <circle class="vp v2" cx="340" cy="360" r="5"/>
+  <circle class="vp v6" cx="340" cy="370" r="5"/>
+</g>
+<!-- via centers -->
+<g fill="#c9a83c">
+  <circle cx="60"  cy="90"  r="1.8"/>
+  <circle cx="60"  cy="112" r="1.8"/>
+  <circle cx="340" cy="96"  r="1.8"/>
+  <circle cx="340" cy="124" r="1.8"/>
+  <circle cx="60"  cy="168" r="1.8"/>
+  <circle cx="60"  cy="260" r="1.8"/>
+  <circle cx="70"  cy="320" r="1.8"/>
+  <circle cx="340" cy="280" r="1.8"/>
+  <circle cx="330" cy="320" r="1.8"/>
+  <circle cx="60"  cy="360" r="1.8"/>
+  <circle cx="80"  cy="420" r="1.8"/>
+  <circle cx="200" cy="440" r="1.8"/>
+  <circle cx="340" cy="360" r="1.8"/>
+  <circle cx="340" cy="370" r="1.8"/>
+</g>
+
+<!-- IC package (QFP) -->
+<rect x="128" y="148" width="144" height="140" rx="4" fill="#0e1a0e" stroke="#1e4010" stroke-width="1"/>
+<circle cx="136" cy="156" r="3.5" fill="#1a5c2a"/>
+<text x="200" y="214" text-anchor="middle" font-family="monospace" font-size="10" fill="rgba(255,255,255,0.62)">ATmega328P</text>
+<text x="200" y="228" text-anchor="middle" font-family="monospace" font-size="8"  fill="rgba(255,255,255,0.32)">32KB · AVR8</text>
+<!-- IC processing flash overlay -->
+<rect class="ic-glow" x="128" y="148" width="144" height="140" rx="4" fill="#c9a83c"/>
+
+<!-- QFP pins top -->
+<g fill="#c9a83c">
+  <rect x="140" y="140" width="7" height="10" rx="1"/>
+  <rect x="153" y="140" width="7" height="10" rx="1"/>
+  <rect x="166" y="140" width="7" height="10" rx="1"/>
+  <rect x="179" y="140" width="7" height="10" rx="1"/>
+  <rect x="192" y="140" width="7" height="10" rx="1"/>
+  <rect x="205" y="140" width="7" height="10" rx="1"/>
+  <rect x="218" y="140" width="7" height="10" rx="1"/>
+  <rect x="231" y="140" width="7" height="10" rx="1"/>
+  <rect x="244" y="140" width="7" height="10" rx="1"/>
+</g>
+<!-- QFP pins bottom -->
+<g fill="#c9a83c">
+  <rect x="140" y="286" width="7" height="10" rx="1"/>
+  <rect x="153" y="286" width="7" height="10" rx="1"/>
+  <rect x="166" y="286" width="7" height="10" rx="1"/>
+  <rect x="179" y="286" width="7" height="10" rx="1"/>
+  <rect x="192" y="286" width="7" height="10" rx="1"/>
+  <rect x="205" y="286" width="7" height="10" rx="1"/>
+  <rect x="218" y="286" width="7" height="10" rx="1"/>
+  <rect x="231" y="286" width="7" height="10" rx="1"/>
+  <rect x="244" y="286" width="7" height="10" rx="1"/>
+</g>
+<!-- QFP pins left -->
+<g fill="#c9a83c">
+  <rect x="118" y="160" width="12" height="7" rx="1"/>
+  <rect x="118" y="174" width="12" height="7" rx="1"/>
+  <rect x="118" y="188" width="12" height="7" rx="1"/>
+  <rect x="118" y="202" width="12" height="7" rx="1"/>
+  <rect x="118" y="216" width="12" height="7" rx="1"/>
+  <rect x="118" y="230" width="12" height="7" rx="1"/>
+  <rect x="118" y="244" width="12" height="7" rx="1"/>
+  <rect x="118" y="258" width="12" height="7" rx="1"/>
+  <rect x="118" y="272" width="12" height="7" rx="1"/>
+</g>
+<!-- QFP pins right -->
+<g fill="#c9a83c">
+  <rect x="270" y="160" width="12" height="7" rx="1"/>
+  <rect x="270" y="174" width="12" height="7" rx="1"/>
+  <rect x="270" y="188" width="12" height="7" rx="1"/>
+  <rect x="270" y="202" width="12" height="7" rx="1"/>
+  <rect x="270" y="216" width="12" height="7" rx="1"/>
+  <rect x="270" y="230" width="12" height="7" rx="1"/>
+  <rect x="270" y="244" width="12" height="7" rx="1"/>
+  <rect x="270" y="258" width="12" height="7" rx="1"/>
+  <rect x="270" y="272" width="12" height="7" rx="1"/>
+</g>
+
+<!-- crystal oscillator -->
+<rect x="64" y="290" width="30" height="18" rx="4" fill="#252510" stroke="#c9a83c" stroke-width="1"/>
+<text x="79" y="303" text-anchor="middle" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.48)">16M</text>
+<rect x="60" y="294" width="5" height="10" rx="1" fill="#c9a83c"/>
+<rect x="93" y="294" width="5" height="10" rx="1" fill="#c9a83c"/>
+
+<!-- capacitor C1 -->
+<rect x="300" y="308" width="5"  height="8" rx="1" fill="#c9a83c" opacity="0.82"/>
+<rect x="313" y="308" width="5"  height="8" rx="1" fill="#c9a83c" opacity="0.82"/>
+<rect x="303" y="308" width="12" height="8" rx="1" fill="#181818"/>
+<text x="309" y="330" text-anchor="middle" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.38)">C1</text>
+
+<!-- capacitor C2 -->
+<rect x="60"  y="398" width="5"  height="8" rx="1" fill="#c9a83c" opacity="0.82"/>
+<rect x="73"  y="398" width="5"  height="8" rx="1" fill="#c9a83c" opacity="0.82"/>
+<rect x="63"  y="398" width="12" height="8" rx="1" fill="#181818"/>
+<text x="69"  y="420" text-anchor="middle" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.38)">C2</text>
+
+<!-- resistor R1 -->
+<rect x="296" y="424" width="5"  height="7" rx="1" fill="#c9a83c" opacity="0.78"/>
+<rect x="307" y="424" width="5"  height="7" rx="1" fill="#c9a83c" opacity="0.78"/>
+<rect x="299" y="424" width="10" height="7" rx="1" fill="#2a1a0a"/>
+<text x="304" y="444" text-anchor="middle" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.35)">R1</text>
+
+<!-- resistor R2 -->
+<rect x="76"  y="448" width="5"  height="7" rx="1" fill="#c9a83c" opacity="0.78"/>
+<rect x="87"  y="448" width="5"  height="7" rx="1" fill="#c9a83c" opacity="0.78"/>
+<rect x="79"  y="448" width="10" height="7" rx="1" fill="#2a1a0a"/>
+<text x="84"  y="468" text-anchor="middle" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.35)">R2</text>
+
+<!-- power LED -->
+<rect x="308" y="454" width="16" height="10" rx="3" fill="#0e1a0e" stroke="#c9a83c" stroke-width="1"/>
+<circle class="pwr-led" cx="316" cy="459" r="4" fill="#22c55e"/>
+<text x="316" y="475" text-anchor="middle" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.35)">PWR</text>
+
+<!-- USB-C connector -->
+<rect x="160" y="504" width="80" height="26" rx="4" fill="#1a1a1a" stroke="rgba(255,255,255,0.22)" stroke-width="1"/>
+<text x="200" y="521" text-anchor="middle" font-family="monospace" font-size="9" fill="rgba(255,255,255,0.48)">USB-C</text>
+<g fill="#c9a83c" opacity="0.88">
+  <rect x="166" y="500" width="5" height="8" rx="1"/>
+  <rect x="175" y="500" width="5" height="8" rx="1"/>
+  <rect x="184" y="500" width="5" height="8" rx="1"/>
+  <rect x="211" y="500" width="5" height="8" rx="1"/>
+  <rect x="220" y="500" width="5" height="8" rx="1"/>
+  <rect x="229" y="500" width="5" height="8" rx="1"/>
+</g>
+
+<!-- silkscreen -->
+<text x="32"  y="154" font-family="monospace" font-size="8" fill="rgba(255,255,255,0.4)">VCC</text>
+<text x="32"  y="166" font-family="monospace" font-size="8" fill="rgba(255,255,255,0.4)">3V3</text>
+<text x="316" y="202" font-family="monospace" font-size="8" fill="rgba(255,255,255,0.4)">GND</text>
+<text x="60"  y="492" font-family="monospace" font-size="8" fill="rgba(255,255,255,0.4)">GPIO</text>
+<text x="290" y="492" font-family="monospace" font-size="8" fill="rgba(255,255,255,0.4)">SPI</text>
+<text x="200" y="66" text-anchor="middle" font-family="monospace" font-size="9" fill="rgba(255,255,255,0.25)">NATH-DEV v2.1</text>
+<text x="30"  y="553" font-family="monospace" font-size="8" fill="rgba(255,255,255,0.18)">REV 2.1 · 2026</text>
+</svg>

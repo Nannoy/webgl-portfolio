@@ -206,17 +206,46 @@ h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
 .chip:hover p{ color:var(--bone-dim); }
 .chip.on .num{ color:var(--ember); }
 .chip.on b{ color:var(--bone); }
-/* the floating window: a generated Sanmon still carried over the hero */
+/* floating peek card — tech product preview */
 .peek{
   position:absolute; z-index:2; right:clamp(78px,11vw,190px); top:clamp(132px,25vh,238px);
   width:clamp(150px,16vw,262px); display:block;
   transition:transform .8s var(--ease-out);
 }
-.peek-fr{ display:block; aspect-ratio:16/10;
-  background:linear-gradient(180deg, rgba(3,6,9,.04) 24%, rgba(3,6,9,.48) 100%),
-    url('https://threeui.com/landing-pages/secret-pathways-assets/generated/kage-sanmon-preview.webp') center / cover no-repeat;
+.peek-fr{
+  display:block; aspect-ratio:16/10; position:relative; overflow:hidden;
+  background:#040d1c;
   outline:1px solid rgba(223,231,224,.16); outline-offset:-1px;
-  box-shadow:0 34px 70px -30px rgba(0,0,0,.9); transition:outline-color .5s; }
+  box-shadow:0 34px 70px -30px rgba(0,0,0,.9); transition:outline-color .5s;
+}
+/* dark UI chrome — top bar */
+.peek-fr::before{
+  content:'';
+  position:absolute; inset:0;
+  background:
+    /* nav bar strip at top */
+    linear-gradient(180deg, rgba(0,80,200,.22) 0 10%, transparent 10%),
+    /* left sidebar panel */
+    linear-gradient(90deg, rgba(0,60,140,.18) 0 22%, transparent 22%),
+    /* centre glow — active content area */
+    radial-gradient(ellipse 65% 55% at 62% 42%, rgba(0,100,255,.09) 0%, transparent 100%),
+    /* fine horizontal scanlines — content rows */
+    repeating-linear-gradient(180deg,
+      transparent 0, transparent 7px,
+      rgba(0,120,255,.04) 7px, rgba(0,120,255,.04) 8px),
+    /* subtle vertical grid */
+    repeating-linear-gradient(90deg,
+      transparent 0, transparent 23px,
+      rgba(0,120,255,.03) 23px, rgba(0,120,255,.03) 24px),
+    #040d1c;
+}
+/* bottom scrim so play button reads cleanly */
+.peek-fr::after{
+  content:'';
+  position:absolute; inset:0;
+  background:linear-gradient(180deg, transparent 45%, rgba(2,8,18,.68) 100%);
+  pointer-events:none;
+}
 .peek:hover{ transform:translate3d(0,-5px,0); }
 .peek:hover .peek-fr{ outline-color:rgba(223,231,224,.42); }
 .peek-play{ position:absolute; top:0; right:0; left:0; bottom:auto; aspect-ratio:16/10;
@@ -299,8 +328,19 @@ h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
 }
 .card:nth-child(2) .card-fr{
   background:
-    linear-gradient(180deg,rgba(3,6,9,.06) 36%,rgba(3,6,9,.74) 100%),
-    url('https://threeui.com/landing-pages/secret-pathways-assets/generated/kage-lantern-court.webp') center / cover no-repeat;
+    /* bottom scrim so card label reads */
+    linear-gradient(180deg, transparent 38%, rgba(2,6,14,.82) 100%),
+    /* simulated status-bar strip */
+    linear-gradient(180deg, rgba(14,30,60,.55) 0 6%, transparent 6%),
+    /* card body rows — light content lines */
+    repeating-linear-gradient(180deg,
+      transparent 0, transparent 9px,
+      rgba(60,140,255,.045) 9px, rgba(60,140,255,.045) 10px),
+    /* right-side accent panel */
+    linear-gradient(90deg, transparent 68%, rgba(30,80,180,.10) 68%),
+    /* ambient glow */
+    radial-gradient(ellipse 70% 60% at 50% 38%, rgba(20,70,200,.10) 0%, transparent 100%),
+    #030a18;
 }
 .card:nth-child(3) .card-fr{
   background: rgba(3,6,9,1);
@@ -756,8 +796,8 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
    left:0, not a negative offset — the plate is trimmed to its own artwork, so
    pulling it off-frame cuts the gate itself rather than trimming empty margin.
    Its left edge sits on the viewport's. */
-[data-fg="gate"] .fg-wall  { left:0; bottom:-30px; width:clamp(430px,47vw,780px); }
-[data-fg="gate"] .fg-pine  { right:-4%; bottom:-46px; width:clamp(190px,21vw,370px); }
+[data-fg="gate"] .fg-wall  { left:-2%; bottom:-40px; width:clamp(160px,15vw,270px); }
+[data-fg="gate"] .fg-pine  { right:-2%; bottom:-60px; width:clamp(82px,8.5vw,158px); }
 [data-fg="gate"] .fg-grass { left:3%;   bottom:-150px; width:clamp(420px,60vw,1050px); }
 
 /* — II · still gardens: sakura and maple sweep in from the two lower corners
@@ -791,7 +831,7 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
 @media (max-width:1080px){
   /* the columns have collapsed and the copy has taken the width back, so the
      framing layers step down rather than crowd it */
-  [data-fg="gate"] .fg-wall      { width:clamp(390px,42vw,600px); }
+  [data-fg="gate"] .fg-wall      { width:clamp(180px,19vw,300px); }
   [data-fg="pathways"] .fg-sakura{ width:clamp(400px,46vw,660px); }
   [data-fg="pathways"] .fg-leaves{ width:clamp(310px,35vw,500px); }
   [data-fg="lessons"] .fg-wall   { width:clamp(360px,45vw,640px); }
@@ -804,7 +844,7 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
   [data-fg="gate"] .fg-pine, [data-fg="pathways"] .fg-sakura,
   [data-fg="pathways"] .fg-leaves, [data-fg="lessons"] .fg-wall,
   [data-fg="eternity"] .fg-sakura, [data-fg="foot"] .fg-stones{ display:none; }
-  [data-fg="gate"] .fg-wall     { left:-14%; bottom:-22px; width:min(82vw,440px); }
+  [data-fg="gate"] .fg-wall     { left:-14%; bottom:-22px; width:min(38vw,210px); }
   [data-fg="gate"] .fg-grass    { left:auto; right:-10%; bottom:-76px; width:min(94vw,530px); }
   [data-fg="pathways"] .fg-lantern{ left:-4%;   bottom:-58px; width:clamp(80px,20vw,128px); }
   [data-fg="pathways"] .fg-bush   { right:-10%; bottom:-38px; width:min(72vw,400px); }
@@ -946,9 +986,9 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
   <div class="hero-top">
     <div class="eyebrow" data-rv="fade"><span class="dot"></span> Flutter Developer — Ado-Ekiti, Nigeria</div>
     <h1 class="display h-hero">
+      <span class="mask-line"><span>Nathan.</span></span>
       <span class="mask-line"><span>Building apps</span></span>
-      <span class="mask-line"><span>that think,</span></span>
-      <span class="mask-line"><span>move & ship.</span></span>
+      <span class="mask-line"><span>that ship.</span></span>
     </h1>
     <p class="hero-sub body" data-rv="up">I'm Nathaniel — a Flutter developer with a bit of AI enthusiasm,
       crafting mobile experiences and full-stack systems that actually reach users.</p>
@@ -970,13 +1010,8 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
     </div>
   </div>
 
-  <a class="peek" href="#pathways" data-view="3" data-rv="fade" data-cursor aria-label="Preview: Featured project — Nannoy">
-    <span class="peek-fr" data-frame></span>
-    <span class="peek-play"><svg viewBox="0 0 22 22" fill="none"><path d="M8 5.6 16.4 11 8 16.4z" fill="#dfe7e0"/></svg></span>
-    <span class="peek-cap"><b class="jp">Nannoy</b><i>AI-powered edtech platform</i></span>
-  </a>
 
-  <div class="word-fb" aria-hidden="true">NATH</div>
+  <div class="word-fb" aria-hidden="true">NATHAN</div>
 
   <div class="hero-side" data-rv="up">
     <span class="v jp">@nannoy</span>
@@ -987,12 +1022,6 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
 <section class="sec" id="gate" data-cam="1">
   <!-- foreground: the wall arrives first, the pine at the edge, the grass last -->
   <div class="fg" data-fg="gate" aria-hidden="true">
-    <span class="fg-el fg-wall" data-fg-in="left">
-      <img src="https://threeui.com/landing-pages/secret-pathways-assets/foreground/png/temple-wall.webp" alt="" width="1536" height="884" loading="lazy" decoding="async">
-    </span>
-    <span class="fg-el fg-pine" data-fg-in="right">
-      <img src="https://threeui.com/landing-pages/secret-pathways-assets/foreground/png/pine-tree.webp" alt="" width="1024" height="1438" loading="lazy" decoding="async">
-    </span>
     <span class="fg-el fg-grass" data-fg-in="up">
       <img src="https://threeui.com/landing-pages/secret-pathways-assets/foreground/png/tall-grass.webp" alt="" width="1717" height="916" loading="lazy" decoding="async">
     </span>
@@ -2860,6 +2889,48 @@ function buildMaple(seed, x, z, scale) {
   return g;
 }
 
+function buildFloatingScreens() {
+  const loader = new THREE.TextureLoader();
+  loader.crossOrigin = 'anonymous';
+  const bezelMat = new THREE.MeshStandardMaterial({ color: 0x0a1828, roughness: .32, metalness: .92 });
+  const edgeMat  = new THREE.MeshBasicMaterial({ color: hdr(.04, .70, 1.10), toneMapped: false, transparent: true, opacity: .40 });
+
+  const panels = [
+    /* PCB / hardware engineering */
+    { url: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&q=80',
+      x: -15.5, y:  9, z: -56, w:  9.5, h: 6.2, ry:  0.30 },
+    /* mobile app / Flutter UI */
+    { url: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&q=80',
+      x:   9.5, y: 11, z: -62, w:  6.0, h: 9.5, ry: -0.22 },
+    /* code / web development */
+    { url: 'https://images.unsplash.com/photo-1555099962-4199c345e5dd?w=900&q=80',
+      x:  -1.5, y: 16, z: -70, w: 11.0, h: 6.8, ry:  0.05 },
+    /* AI / data visualization */
+    { url: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=900&q=80',
+      x:  -20,  y: 14, z: -66, w:  8.5, h: 5.5, ry:  0.35 },
+  ];
+
+  panels.forEach(p => {
+    const bezel = new THREE.Mesh(new THREE.BoxGeometry(p.w + .30, p.h + .30, .08), bezelMat);
+    bezel.position.set(p.x, p.y, p.z); bezel.rotation.y = p.ry; scene.add(bezel);
+
+    const edge = new THREE.Mesh(new THREE.BoxGeometry(p.w + .12, p.h + .12, .05), edgeMat);
+    edge.position.set(p.x, p.y, p.z + .02); edge.rotation.y = p.ry; scene.add(edge);
+
+    const tex = loader.load(p.url);
+    tex.encoding = THREE.sRGBEncoding;
+    const screen = new THREE.Mesh(
+      new THREE.PlaneGeometry(p.w, p.h),
+      new THREE.MeshBasicMaterial({ map: tex, transparent: true, opacity: .82, depthWrite: false, fog: true, toneMapped: false }));
+    screen.position.set(p.x, p.y, p.z + .05); screen.rotation.y = p.ry; scene.add(screen);
+
+    const scan = new THREE.Mesh(new THREE.PlaneGeometry(p.w, p.h),
+      new THREE.MeshBasicMaterial({ map: tx(texGlow('rgba(0,160,255,.08)', 'rgba(0,60,200,.03)')),
+        transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, opacity: .55 }));
+    scan.position.set(p.x, p.y, p.z + .06); scan.rotation.y = p.ry; scene.add(scan);
+  });
+}
+
 function buildRocks() {
   const mat    = new THREE.MeshStandardMaterial({ color: 0x1a2535, roughness: .38, metalness: .62 });
   const ledMat = new THREE.MeshBasicMaterial({ color: hdr(.08, 1.40, 2.20), toneMapped: false });
@@ -2953,7 +3024,7 @@ function buildWordmark() {
   const m = cvs(4, 4).getContext('2d');
   m.font = '600 ' + SZ + 'px Wordmark, sans-serif';
   m.textBaseline = 'alphabetic'; m.textAlign = 'left';
-  const word = 'NATH', gl = [];
+  const word = 'NATHAN', gl = [];
   let pen = 0, ascMax = 0, descMax = 0, xMin = 1e9, xMax = -1e9;
   for (const ch of word) {
     const t = m.measureText(ch);
@@ -3113,28 +3184,65 @@ function buildAtmosphere() {
    camera's own sight line; LEAF_R is only the far backstop for a rig that has
    walked out from under its weather. */
 const LEAF_AHEAD = 11, LEAF_SPREAD = 12, LEAF_R = 30;
+function texTechLabel(text, color) {
+  const W = 192, H = 52;
+  const c = document.createElement('canvas');
+  c.width = W; c.height = H;
+  const ctx = c.getContext('2d');
+  ctx.clearRect(0, 0, W, H);
+  ctx.font = 'bold 21px monospace';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  /* subtle halo so the text lifts off the dark scene */
+  ctx.shadowColor = color;
+  ctx.shadowBlur = 8;
+  ctx.fillStyle = color;
+  ctx.fillText(text, W / 2, H / 2);
+  return c;
+}
+
 function buildLeafFall() {
+  const TERMS = [
+    { text: 'Flutter',   color: 'rgba(84,210,255,.92)'  },
+    { text: 'Dart',      color: 'rgba(0,200,255,.88)'   },
+    { text: 'Python',    color: 'rgba(255,212,60,.85)'  },
+    { text: 'AI / ML',   color: 'rgba(180,120,255,.88)' },
+    { text: 'React',     color: 'rgba(97,218,251,.88)'  },
+    { text: 'Node.js',   color: 'rgba(100,200,80,.85)'  },
+    { text: 'Firebase',  color: 'rgba(255,170,60,.82)'  },
+    { text: '{ }',       color: 'rgba(0,200,255,.75)'   },
+    { text: '</>',       color: 'rgba(0,200,255,.75)'   },
+    { text: 'TypeScript',color: 'rgba(80,140,255,.85)'  },
+  ];
+  const rnd = mulberry32(404);
   const N = LOW ? 110 : 260;
-  const mat = new THREE.MeshStandardMaterial({
-    map: tx(texLeaf()), alphaTest: .42, side: THREE.DoubleSide,
-    color: 0x40080a, roughness: .84, metalness: 0,
-    /* green and blue driven to nothing: the composite tone-maps at the end,
-       and an emissive red with any green in it comes back out of that pink */
-    emissive: 0x780200, emissiveIntensity: .72
+  const perTerm = Math.ceil(N / TERMS.length);
+  const allParticles = [];
+  const meshes = [];
+
+  TERMS.forEach(term => {
+    const mat = new THREE.MeshBasicMaterial({
+      map: tx(texTechLabel(term.text, term.color), { aniso: 4 }),
+      transparent: true, alphaTest: .04,
+      side: THREE.DoubleSide, depthWrite: false,
+      fog: true, toneMapped: false,
+    });
+    const inst = new THREE.InstancedMesh(new THREE.PlaneGeometry(1.45, .42), mat, perTerm);
+    inst.frustumCulled = false; inst.renderOrder = 5;
+    inst.castShadow = inst.receiveShadow = false;
+    scene.add(inst); meshes.push(inst);
+
+    for (let i = 0; i < perTerm; i++) allParticles.push({
+      x: (rnd() - .5) * 2 * LEAF_R, z: (rnd() - .5) * 2 * LEAF_R, y: rnd() * 26,
+      fall: .25 + rnd() * .65,
+      sway: .30 + rnd() * .9, swayPh: rnd() * TAU, swayAmp: .20 + rnd() * .70,
+      spin: (rnd() - .5) * .50, roll: rnd() * TAU, rollSp: .20 + rnd() * .70,
+      tilt: rnd() * TAU, s: .70 + rnd() * .60,
+      inst, meshIdx: i,
+    });
   });
-  const inst = new THREE.InstancedMesh(new THREE.PlaneGeometry(.40, .40), mat, N);
-  inst.frustumCulled = false; inst.renderOrder = 5;
-  inst.castShadow = inst.receiveShadow = false;
-  const rnd = mulberry32(404), list = [];
-  for (let i = 0; i < N; i++) list.push({
-    x: (rnd() - .5) * 2 * LEAF_R, z: (rnd() - .5) * 2 * LEAF_R, y: rnd() * 26,
-    fall: .5 + rnd() * .9,
-    sway: .45 + rnd() * 1.5, swayPh: rnd() * TAU, swayAmp: .30 + rnd() * .95,
-    spin: (rnd() - .5) * 2.6, roll: rnd() * TAU, rollSp: .5 + rnd() * 2.0,
-    tilt: rnd() * TAU, s: .55 + rnd() * .9
-  });
-  scene.add(inst);
-  WORLD.leaves = { mesh: inst, list: list };
+
+  WORLD.leaves = { meshes, list: allParticles };
 }
 const LEAF_M = new THREE.Matrix4(), LEAF_Q = new THREE.Quaternion();
 const LEAF_E = new THREE.Euler(), LEAF_P = new THREE.Vector3(), LEAF_S = new THREE.Vector3();
@@ -3142,11 +3250,6 @@ const LEAF_F = new THREE.Vector3();
 function updateLeaves(dt) {
   const LV = WORLD.leaves; if (!LV) return;
   const cy = camera.position.y, L = LV.list;
-  /* Respawn ahead of the rig, not around it. A band centred on the camera
-     spends nearly all of itself behind and beside the frustum — of a couple of
-     hundred leaves only a dozen were ever on screen. Recycling them into the
-     cone the camera is actually looking down puts the same count in frame
-     several times over, and costs nothing. */
   camera.getWorldDirection(LEAF_F);
   LEAF_F.y = 0;
   if (LEAF_F.lengthSq() < 1e-6) LEAF_F.set(0, 0, -1); else LEAF_F.normalize();
@@ -3158,28 +3261,25 @@ function updateLeaves(dt) {
     l.y -= l.fall * dt;
     l.roll += l.rollSp * dt;
     l.tilt += l.spin * dt;
-    if (seed || l.y < cy - 10) {                /* back to the top of the band */
+    if (seed || l.y < cy - 10) {
       l.y = seed ? cy - 10 + Math.random() * 26 : cy + 16;
       const a = Math.random() * TAU, r = Math.sqrt(Math.random()) * LEAF_SPREAD;
       l.x = fx + Math.cos(a) * r;
       l.z = fz + Math.sin(a) * r;
     }
-    /* the far wrap is a backstop for a rig that has walked away from its own
-       leaves — it sits well outside the fog, so nothing is seen to jump */
     const cx = camera.position.x, cz = camera.position.z;
     if (l.x - cx > LEAF_R) l.x -= 2 * LEAF_R; else if (l.x - cx < -LEAF_R) l.x += 2 * LEAF_R;
     if (l.z - cz > LEAF_R) l.z -= 2 * LEAF_R; else if (l.z - cz < -LEAF_R) l.z += 2 * LEAF_R;
-    /* the side-slip of a leaf shedding air off one edge, then the other */
     const sw = Math.sin(clock * l.sway + l.swayPh);
     LEAF_P.set(l.x + sw * l.swayAmp, l.y,
                l.z + Math.cos(clock * l.sway * .7 + l.swayPh) * l.swayAmp * .6);
-    LEAF_E.set(l.roll, l.tilt, sw * .55);
+    LEAF_E.set(l.roll, l.tilt, sw * .18);
     LEAF_Q.setFromEuler(LEAF_E);
     LEAF_S.setScalar(l.s);
     LEAF_M.compose(LEAF_P, LEAF_Q, LEAF_S);
-    LV.mesh.setMatrixAt(i, LEAF_M);
+    l.inst.setMatrixAt(l.meshIdx, LEAF_M);
   }
-  LV.mesh.instanceMatrix.needsUpdate = true;
+  LV.meshes.forEach(m => { m.instanceMatrix.needsUpdate = true; });
 }
 
 /* ==================================================== 6c · the cursor wisps
@@ -4651,11 +4751,12 @@ const JOBS = [
       buildLantern(-cheekX(z), z, sc, cheekTop(z));
     });
   }],
-  ['Growing the maples', () => {
+  ['Raising the arrays', () => {
     buildMaple(71, 12.6, -13.0, 1.05); buildMaple(72, -11.8, -9.4, .95);
     buildMaple(73, 9.2, -19.0, .82);   buildMaple(74, -14.5, -17.5, 1.0);
     buildMaple(75, 16.5, -6.0, .88);
   }],
+  ['Wiring the screens', () => buildFloatingScreens()],
   ['Painting the near grass', () => buildForeground()],
   ['Cutting the word', () => buildWordmark()],
   ['Raising the mist', () => { buildAtmosphere(); buildLeafFall(); buildWisps(); }],
